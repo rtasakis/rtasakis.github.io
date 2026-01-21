@@ -1,0 +1,139 @@
+{
+  "sectionTitle": "Journey",
+  "experience": {
+    "title": "Experience",
+    "items": [
+      {
+        "organization": "Tasakis Venture Strategy",
+        "location": "Antwerp, Belgium",
+        "roles": [
+          {
+            "title": "Founder & Principal Consultant",
+            "start": "Oct 2025",
+            "end": "Today"
+          }
+        ]
+      },
+      {
+        "organization": "Solvuu",
+        "location": "New York, United States",
+        "roles": [
+          {
+            "title": "Head of Business Development",
+            "start": "Aug 2024",
+            "end": "Sep 2025"
+          },
+          {
+            "title": "Bioinformatics Scientist",
+            "start": "Jul 2023",
+            "end": "Jul 2024"
+          }
+        ]
+      },
+      {
+        "organization": "Icahn School of Medicine at Mount Sinai",
+        "location": "New York, United States",
+        "roles": [
+          {
+            "title": "Postdoctoral Researcher",
+            "start": "Jan 2022",
+            "end": "Jul 2023"
+          }
+        ]
+      },
+      {
+        "organization": "German Cancer Research Center (DKFZ)",
+        "location": "Heidelberg, Germany",
+        "roles": [
+          {
+            "title": "Doctoral Researcher",
+            "start": "Aug 2017",
+            "end": "Dec 2021"
+          }
+        ]
+      },
+      {
+        "organization": "European Molecular Biology Laboratory (EMBL)",
+        "location": "Heidelberg, Germany",
+        "roles": [
+          {
+            "title": "Visiting Scientist in Bioinformatics",
+            "start": "Sep 2016",
+            "end": "Aug 2017"
+          }
+        ]
+      }
+    ]
+  },
+  "education": {
+    "title": "Education",
+    "items": [
+      {
+        "organization": "Antwerp Management School",
+        "location": "Belgium",
+        "degree": "Executive MBA",
+        "start": "Oct 2025",
+        "end": "Today"
+      },
+      {
+        "organization": "University of Heidelberg",
+        "location": "Germany",
+        "degree": "Doctor of Natural Sciences (PhD)",
+        "start": "Aug 2017",
+        "end": "Nov 2021"
+      },
+      {
+        "organization": "Aristotle University of Thessaloniki",
+        "location": "Greece",
+        "degree": "Bachelor of Science in Biology",
+        "start": "Oct 2012",
+        "end": "Sep 2016"
+      }
+    ]
+  },
+  "certifications": {
+    "title": "Certifications",
+    "items": [
+      {
+        "title": "McKinsey Forward Program: Strategy & problem-solving skills",
+        "issuer": "McKinsey & Co",
+        "year": "2025"
+      },
+      {
+        "title": "MBA Essentials",
+        "issuer": "London School of Economics and Political Science",
+        "year": "2025"
+      },
+      {
+        "title": "Google Data Analytics",
+        "issuer": "Google",
+        "date": "Dec 2022"
+      }
+    ]
+  },
+  "honors": {
+    "title": "Honors & Awards",
+    "items": [
+      {
+        "title": "Global Perspectives Scholarship",
+        "issuer": "Antwerp Management School, Belgium",
+        "year": "2025"
+      },
+      {
+        "title": "CAROTS Startup School Participation",
+        "issuer": "DESY, Germany",
+        "year": "2021"
+      },
+      {
+        "title": "Greek National Award for Excellence in Science (‘Fotis Kafatos’) finalist",
+        "issuer": "Athens, Greece",
+        "year": "2018"
+      },
+      {
+        "title": "Otto Bayer Fellowship",
+        "issuer": "Bayer Foundations, Germany",
+        "year": "2016"
+      }
+    ]
+  }
+}

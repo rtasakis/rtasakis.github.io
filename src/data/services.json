@@ -1,0 +1,64 @@
+{
+  "services": [
+    {
+      "id": "innovators",
+      "title": "For Innovators",
+      "service": [
+        {
+          "id": "strategic-business-development",
+          "name": "Strategic Business Development",
+          "text": "End-to-end strategy design and hands-on execution; Services & assets.",
+          "icon": "trendingUp"
+        },
+        {
+          "id": "rd-operations-management",
+          "name": "R&D Operations Management",
+          "text": "Align your operations with your objectives, mitigate risks, and optimize project management and deliverables.",
+          "icon": "cog"
+        },
+        {
+          "id": "fundraising-support-readiness",
+          "name": "Fundraising Support & Readiness",
+          "text": "Preparation of core documents for VCs and non-dilutive grants. Build and maintain your Data Room.",
+          "icon": "fileText"
+        },
+        {
+          "id": "build-team-advisors",
+          "name": "Build Your Team & Advisors",
+          "text": "Connect with top-tier scientists and entrepreneurs.",
+          "icon": "users"
+        }
+      ]
+    },
+    {
+      "id": "investors",
+      "title": "For Investors",
+      "service": [
+        {
+          "id": "scientific-technical-due-diligence",
+          "name": "Scientific & Technical Due Diligence",
+          "text": "Validate scientific soundness, team capabilities, and development risks. We get our hands dirty with code.",
+          "icon": "microscope"
+        },
+        {
+          "id": "market-competitive-analysis",
+          "name": "Market & Competitive Analysis",
+          "text": "Assess market opportunity, positioning, and whitespace.",
+          "icon": "barChart3"
+        },
+        {
+          "id": "venture-scouting",
+          "name": "Venture Scouting",
+          "text": "Identify the cutting-edge startups before someone else does.",
+          "icon": "search"
+        },
+        {
+          "id": "curated-founder-access",
+          "name": "Curated Founder Access",
+          "text": "Introductions to vetted, interdisciplinary innovators aligned with your investment thesis.",
+          "icon": "network"
+        }
+      ]
+    }
+  ]
+}

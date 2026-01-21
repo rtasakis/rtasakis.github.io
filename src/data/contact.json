@@ -1,0 +1,31 @@
+{
+  "sectionTitle": "Contact",
+  "backgroundImage": "background-image.png",
+  "left": {
+    "logoImage": "logo-dark.png",
+    "linkedin": {
+      "type": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/rafailtasakis/"
+    },
+    "mail": {
+      "type": "email",
+      "label": "Email",
+      "url": "mailto:rafail@tasakis.com",
+      "value": "rafail@tasakis.com"
+    },
+    "location": {
+      "label": "Location",
+      "value": "Antwerp, Belgium"
+    }
+  },
+  "right": {
+    "name": "Rafail Tasakis",
+    "role": "Founder & Principal Consultant",
+    "brand": "Tasakis Venture Strategy",
+    "quote": {
+      "text": "Everything is theoretically impossible until it is done.",
+      "author": "Robert A. Heinlein"
+    }
+  }
+}

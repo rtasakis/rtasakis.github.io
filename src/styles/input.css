@@ -1,0 +1,586 @@
+/* src/styles/input.css */
+@import "tailwindcss";
+@config "../../tailwind.config.cjs";
+
+@layer base {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* ===== General Classes ===== */
+
+.section-title {
+  @apply mb-12 text-center text-5xl font-bold tracking-tight text-neutral-900;
+}
+
+/* ===== Unified section spacing ===== */
+
+.section-wrap {
+  @apply w-full py-20;
+}
+
+@media (min-width: 768px) {
+  .section-wrap {
+    @apply py-24;
+  }
+}
+
+.section-inner {
+  @apply mx-auto max-w-6xl px-4;
+}
+
+/* ===== Layout ===== */
+.app-layout {
+  @apply min-h-screen relative;
+}
+
+.app-main {
+  @apply relative;
+}
+
+/* ===== Header ===== */
+
+.app-header {
+  @apply fixed top-0 left-0 right-0 z-50;
+  @apply flex items-center justify-between;
+  @apply px-6 py-6;
+  background: transparent;
+}
+
+.app-header__logo {
+  @apply inline-flex items-center;
+}
+
+.app-header__logo-img {
+  height: 96px;
+  width: auto;
+  transition:
+    height 0.3s ease,
+    transform 0.3s ease;
+}
+
+.app-header__logo:hover .app-header__logo-img {
+  transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  .app-header__logo-img {
+    height: 96px;
+  }
+}
+
+/* hamburger button wrapper (visibility handled here, not JSX) */
+.app-header__hamburger {
+  @apply md:hidden;
+  @apply focus:outline-none;
+}
+
+/* ===============================
+   MENU (Desktop + Mobile)
+   Always same style (Home + all sections)
+================================ */
+
+/* ---- Desktop wrapper (hidden on mobile) ---- */
+.menu--desktop {
+  @apply hidden md:block fixed left-4 top-1/2 -translate-y-1/2 z-40;
+}
+
+/* expand on hover */
+.menu--desktop:hover .menu__container {
+  @apply w-52;
+}
+
+/* container (dark glass: #262626 @ 60%) */
+.menu__container {
+  @apply flex flex-col gap-2;
+  @apply rounded-2xl border border-white/10;
+  background: rgba(38, 38, 38, 0.6); /* #262626 @ 60% */
+  backdrop-filter: blur(10px);
+  @apply p-2 shadow-lg;
+  @apply transition-all duration-300 ease-out;
+  @apply w-14 overflow-hidden;
+}
+
+/* ---- Desktop item ---- */
+.menu__item {
+  @apply relative flex items-center gap-3;
+  @apply rounded-xl px-3 py-3;
+  @apply transition-colors duration-200;
+  @apply outline-none;
+  cursor: pointer;
+}
+
+.menu__item:hover {
+  @apply bg-white/10;
+  cursor: pointer;
+}
+
+.menu__item:focus-visible {
+  @apply ring-2 ring-white/30;
+}
+
+.menu__item.is-active {
+  @apply bg-white/10;
+}
+
+/* active vertical bar (PRIMARY) */
+.menu__active-bar {
+  @apply absolute left-0 top-1/2 -translate-y-1/2;
+  @apply h-7 w-1 rounded-full;
+  @apply bg-primary;
+  @apply transition-opacity duration-200;
+  @apply opacity-0;
+}
+
+.menu__item.is-active .menu__active-bar {
+  @apply opacity-100;
+}
+
+/* icon (always white) */
+.menu__icon {
+  @apply h-5 w-5 shrink-0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.menu__icon.is-active {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* label: hidden by default, revealed on hover */
+.menu__label {
+  @apply whitespace-nowrap text-sm;
+  color: rgba(255, 255, 255, 0.75);
+  @apply transition-all duration-300;
+  @apply opacity-0 translate-x-2;
+}
+
+.menu--desktop:hover .menu__label {
+  @apply opacity-100 translate-x-0;
+}
+
+.menu__label.is-active {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* ===============================
+   MOBILE DROPDOWN
+================================ */
+
+.mobile-menu {
+  @apply md:hidden fixed left-4 right-4 top-20 z-60;
+  display: none;
+}
+
+.mobile-menu.is-open {
+  display: flex;
+}
+
+.mobile-menu__panel {
+  @apply w-full rounded-2xl border border-white/10;
+  background: rgba(38, 38, 38, 0.85);
+  backdrop-filter: blur(10px);
+  @apply p-4 shadow-lg;
+}
+
+.mobile-menu__list {
+  @apply flex flex-col items-center justify-center w-full;
+  @apply space-y-2 font-semibold;
+  color: rgba(255, 255, 255, 1);
+}
+
+.mobile-menu__item {
+  @apply w-full flex items-center justify-center gap-3;
+  @apply rounded-xl px-4 py-3;
+  cursor: pointer;
+}
+
+.mobile-menu__item:hover {
+  @apply bg-white/10;
+  cursor: pointer;
+}
+
+.mobile-menu__item.is-active {
+  @apply bg-white/10;
+}
+
+.mobile-menu__icon {
+  @apply h-5 w-5;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.mobile-menu__label {
+  @apply text-sm;
+  color: rgba(255, 255, 255, 1);
+}
+
+/* ===============================
+   HAMBURGER MENU
+================================ */
+
+.hamburger {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  transition: all 0.25s;
+  position: relative;
+}
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 3px;
+  top: 0;
+  left: 0;
+  background: #9c9aa6;
+  transform: rotate(0);
+  transition: all 0.5s;
+}
+
+.hamburger-middle {
+  transform: translateY(7px);
+}
+
+.hamburger-bottom {
+  transform: translateY(14px);
+}
+
+.open {
+  transform: rotate(90deg);
+  transform: translateY(0px);
+}
+
+.open .hamburger-top {
+  transform: rotate(45deg) translateY(6px) translateX(6px);
+}
+
+.open .hamburger-middle {
+  display: none;
+}
+
+.open .hamburger-bottom {
+  transform: rotate(-45deg) translateY(6px) translateX(-6px);
+}
+
+/* ===============================
+   SERVICES
+================================ */
+
+.services {
+  @apply mx-auto max-w-6xl px-4 py-20;
+}
+
+.services-rows {
+  @apply mt-12 grid gap-10;
+}
+
+/* Category container (white rounded block) */
+
+.services-category__inner {
+  @apply px-6 py-10 md:px-10;
+}
+
+/* Center the heading block, but align divider to text start */
+.services-category__head {
+  @apply mb-8 flex justify-center;
+}
+
+.services-category__head-inner {
+  @apply flex flex-col items-start;
+}
+
+.services-category__title {
+  @apply text-2xl font-semibold text-neutral-800;
+}
+
+.services-category__divider {
+  @apply mt-2 h-0.5 w-10;
+  @apply bg-primary-600;
+}
+
+/* Grid of service cards */
+.services-grid {
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+/* ===============================
+   SERVICE CARD
+================================ */
+
+.service-card {
+  @apply rounded-2xl border border-white/10;
+  @apply p-6 shadow-sm transition-all duration-200;
+  @apply bg-primary;
+}
+
+.service-card:hover {
+  @apply -translate-y-0.5 shadow-lg;
+  cursor: pointer;
+}
+
+.service-card__icon-row {
+  @apply mb-4 flex items-center justify-center;
+}
+
+.service-card__icon-badge {
+  @apply grid h-12 w-12 place-items-center rounded-full;
+  @apply bg-white/10;
+}
+
+.service-card__icon {
+  @apply h-5 w-5;
+  @apply text-white/90;
+}
+
+.service-card__title {
+  @apply text-center text-lg font-semibold text-white;
+}
+
+.service-card__text {
+  @apply mt-3 text-center text-sm leading-relaxed;
+  @apply text-white/80;
+}
+
+/* ===============================
+   ABOUT
+================================ */
+
+.about {
+  @apply relative overflow-hidden;
+  @apply bg-cover bg-center bg-no-repeat;
+}
+
+/* ===============================
+   ABOUT BIO
+================================ */
+
+.about-bio {
+  @apply flex flex-col-reverse gap-10;
+  @apply lg:grid lg:grid-cols-2 lg:items-start;
+}
+
+.about-bio__img {
+  @apply w-full rounded-2xl object-cover;
+  @apply shadow-sm ring-1 ring-black/5;
+}
+
+.about-bio__name {
+  @apply text-3xl font-bold;
+  @apply text-neutral-800;
+}
+
+.about-bio__position {
+  @apply mt-2;
+  @apply text-primary-500;
+}
+
+.about-bio__org {
+  @apply text-xl font-semibold;
+  @apply text-primary;
+}
+
+.about-bio__content {
+  @apply mt-6 max-w-none;
+  @apply text-neutral-800;
+}
+
+/* ===============================
+   ABOUT HIGHLIGHTS
+================================ */
+
+.about-highlights {
+  @apply mt-16;
+}
+
+.about-highlights__title {
+  @apply mb-6 text-center text-2xl font-semibold;
+  @apply text-neutral-800;
+}
+
+.about-highlights__grid {
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+.about-highlights__card {
+  @apply rounded-2xl bg-white p-6 text-center;
+  @apply shadow-sm ring-1 ring-black/5;
+}
+
+.about-highlights__card-title {
+  @apply text-base font-semibold;
+  @apply text-neutral-800;
+}
+
+.about-highlights__card-text {
+  @apply mt-2 text-sm;
+  @apply text-black/60;
+}
+
+/* ===============================
+   JOURNEY
+================================ */
+
+.journey {
+  @apply mx-auto max-w-6xl px-4 py-20;
+}
+
+.journey-grid {
+  @apply grid gap-10 md:grid-cols-2;
+}
+
+.journey-grid--bottom {
+  @apply mt-2 md:mt-16;
+}
+
+/* ===============================
+   JOURNEY BLOCK TITLES
+================================ */
+
+.journey-block-title {
+  @apply mb-6 text-center text-2xl font-semibold;
+  @apply text-neutral-800;
+}
+
+/* ===============================
+   TIMELINE
+================================ */
+
+.journey-timeline {
+  @apply mt-4;
+}
+
+.journey-timeline-item {
+  @apply relative flex gap-4;
+}
+
+.journey-timeline-marker {
+  @apply relative flex w-6 justify-center;
+}
+
+.journey-timeline-dot {
+  @apply mt-1 h-3 w-3 rounded-full;
+  @apply bg-black/20;
+}
+
+.journey-timeline-line {
+  @apply absolute top-5 bottom-0 w-px;
+  @apply bg-black/10;
+}
+
+.journey-timeline-content {
+  @apply pb-6;
+}
+
+.journey-timeline-header {
+  @apply font-semibold;
+  @apply text-neutral-800;
+}
+
+.journey-timeline-text {
+  @apply mt-0.5;
+  @apply text-black/60;
+}
+
+/* ===============================
+   BULLET LISTS
+================================ */
+
+.journey-bullet-list {
+  @apply list-disc space-y-2 pl-5;
+  @apply text-black/60;
+}
+
+/* ===== Contact ===== */
+.contact-section {
+  @apply w-full overflow-hidden py-20 bg-cover bg-center bg-no-repeat;
+}
+
+.contact-card {
+  @apply mx-auto w-full max-w-5xl px-6 py-10 md:px-12 md:py-12;
+}
+
+.contact-grid {
+  @apply grid gap-10 md:grid-cols-2 items-start md:items-center;
+}
+
+.contact-right {
+  @apply text-neutral-800 md:pl-10;
+}
+
+/* ===== Info Row ===== */
+.info-row {
+  @apply mt-6 flex items-start gap-3 text-sm;
+}
+
+.info-row-icon {
+  @apply mt-0.5 h-6 w-6 text-neutral-800;
+}
+
+.info-row-label {
+  @apply font-semibold text-neutral-800;
+}
+
+.info-row-value {
+  @apply leading-relaxed text-neutral-800;
+}
+
+.info-row-link {
+  @apply leading-relaxed text-neutral-800 transition hover:text-primary hover:underline;
+}
+
+/* ===== Hero Vertical Slide Switcher (premium) ===== */
+
+.hero-switcher {
+  @apply absolute right-6 top-1/2 -translate-y-1/2 z-20;
+  @apply flex flex-col items-center justify-center gap-2;
+  @apply rounded-full border border-white/15 bg-black/25 backdrop-blur-md;
+  @apply px-2 py-3;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 768px) {
+  .hero-switcher {
+    top: auto;
+    bottom: 1.25rem;
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+.hero-switcher__item {
+  @apply relative z-10;
+  @apply h-10 w-10 rounded-full;
+  @apply grid place-items-center;
+  @apply text-[13px] font-semibold tracking-wide;
+  @apply text-white/55;
+  @apply transition duration-200;
+}
+
+.hero-switcher__item:hover {
+  @apply text-white/85;
+  cursor: pointer;
+}
+
+/* active knob */
+.hero-switcher__item.is-active {
+  @apply text-white;
+}
+
+.hero-switcher__item.is-active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #2e5365;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  z-index: -1;
+}

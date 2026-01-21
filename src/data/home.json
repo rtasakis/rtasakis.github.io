@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "innovators",
+      "audience": "Innovators",
+      "title": "Let’s build on your bold idea.",
+      "text": [
+        "I work with innovators to structure ambitious ideas and prepare them for market entry.",
+        "From early-stage strategy to scale, I bridge R&D and business teams in preparation for sustainable growth. I help with strategy, fundraising readiness, product/market fitness, and business development."
+      ],
+      "cta": {
+        "label": "Ready to take off?",
+        "action": "scroll",
+        "target": "contact"
+      },
+      "background": [
+        {
+          "src": "innovators.jpg",
+          "alt": "Innovators background"
+        },
+        {
+          "src": "innovators-2.png",
+          "alt": "Innovators background alt"
+        }
+      ]
+    },
+    {
+      "id": "investors",
+      "audience": "Investors",
+      "title": "Let’s dig deeper than the pitch-deck.",
+      "text": [
+        "I support investors with hands-on scientific and technical due diligence, validating both the science and the execution risks behind each opportunity.",
+        "By combining research depth with market perspective, I help uncover real value beyond the pitch. In addition, through maintaining a strong global network of entrepreneurs, I can help investors spot the next big thing before it happens or strengthen portfolio company performance."
+      ],
+      "cta": {
+        "label": "Ready to maximize your ROI?",
+        "action": "scroll",
+        "target": "contact"
+      },
+      "background": [
+        {
+          "src": "investors.jpg",
+          "alt": "Investors background"
+        },
+        {
+          "src": "investors-2.png",
+          "alt": "Investors background alt"
+        }
+      ]
+    }
+  ]
+}

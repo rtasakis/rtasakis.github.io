@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "id": "home", "label": "Home", "icon": "home" },
+    { "id": "services", "label": "Services", "icon": "bolt" },
+    { "id": "about", "label": "About", "icon": "user" },
+    { "id": "journey", "label": "Journey", "icon": "route" },
+    { "id": "contact", "label": "Contact", "icon": "email" }
+  ]
+}
