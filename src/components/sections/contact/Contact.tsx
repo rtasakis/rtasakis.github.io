@@ -107,7 +107,7 @@ function ContactCard({ data }: { data: ContactData }) {
         <div className="contact-right">
           <h3 className="text-3xl font-bold">{data.right.name}</h3>
 
-          <div className="mt-2 text-sm font-semibold text-primary-500">
+          <div className="mt-2 text-xl font-semibold text-primary">
             {data.right.role}
           </div>
 

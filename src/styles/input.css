@@ -363,9 +363,19 @@
   @apply lg:grid lg:grid-cols-2 lg:items-start;
 }
 
-.about-bio__img {
+/* .about-bio__img {
   @apply w-full rounded-2xl object-cover;
   @apply shadow-sm ring-1 ring-black/5;
+} */
+
+.about-bio__image {
+  @apply relative overflow-hidden rounded-2xl;
+  @apply pt-3; /* 👈 inner spacing */
+  @apply ring-1 ring-white/25;
+  @apply bg-white/5 backdrop-blur-md;
+  @apply shadow-lg shadow-black/30;
+
+  transition: transform 0.4s ease;
 }
 
 .about-bio__name {
@@ -375,7 +385,8 @@
 
 .about-bio__position {
   @apply mt-2;
-  @apply text-primary-500;
+  @apply text-xl font-semibold;
+   @apply text-primary;
 }
 
 .about-bio__org {
@@ -411,6 +422,7 @@
 }
 
 .about-highlights__card-title {
+  @apply flex items-baseline justify-center gap-2;
   @apply text-base font-semibold;
   @apply text-neutral-800;
 }
@@ -418,6 +430,14 @@
 .about-highlights__card-text {
   @apply mt-2 text-sm;
   @apply text-black/60;
+}
+
+.about-highlights__number {
+  @apply inline-block min-w-[2ch] text-4xl font-bold text-primary;
+}
+
+.about-highlights__label {
+  @apply text-base font-semibold text-neutral-800;
 }
 
 /* ===============================

@@ -2,10 +2,12 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import home from "@/data/home.json";
 import { getImageUrl } from "@/utils/getImageUrl";
-import HeroBackgroundMotion from "@/components/playground/HeroBackgroundMotion";
+import CarouselBackgroundGlitch, {
+  type CarouselBgHandle,
+} from "@/components/playground/CarouselBackgroundGlitch";
 
 type HeroBackgroundItem = {
-  src: string; // e.g. "innovators.jpg"
+  src: string;
   alt: string;
 };
 
@@ -19,7 +21,7 @@ type HeroCard = {
     action: "scroll" | "link";
     target: string;
   };
-  background: [HeroBackgroundItem, HeroBackgroundItem]; // exactly 2
+  background: [HeroBackgroundItem]; // ✅ your schema: 1 image
 };
 
 function handleCta(cta: HeroCard["cta"]) {
@@ -32,7 +34,6 @@ function handleCta(cta: HeroCard["cta"]) {
 }
 
 function bgUrl(fileName: string) {
-  // your getImageUrl already prepends /src/assets/images/
   return getImageUrl(fileName);
 }
 
@@ -61,57 +62,6 @@ export default function Home() {
 
   const isAnimatingRef = useRef(false);
 
-  const goTo = (nextIndex: number) => {
-    if (!cards.length) return;
-
-    const currentIndex = activeIndexRef.current;
-    if (nextIndex === currentIndex) return;
-    if (isAnimatingRef.current) return;
-
-    isAnimatingRef.current = true;
-
-    const outTargets = [
-      audienceRef.current,
-      titleRef.current,
-      textWrapRef.current,
-      ctaRef.current,
-    ].filter(Boolean) as Element[];
-
-    const tl = gsap.timeline({
-      onComplete: () => {
-        requestAnimationFrame(() => {
-          isAnimatingRef.current = false;
-        });
-      },
-    });
-
-    // 1) Text OUT (a bit faster)
-    tl.to(
-      outTargets,
-      {
-        opacity: 0,
-        y: -14,
-        filter: "blur(8px)",
-        duration: 0.32,
-        ease: "power2.in",
-        stagger: 0.04,
-      },
-      0,
-    );
-
-    // 2) Switch slide EARLY (while bg is already moving)
-    tl.add(() => {
-      setActiveIndex(nextIndex);
-    }, 0.18);
-  };
-
-  const next = () => {
-    if (!cards.length) return;
-    const currentIndex = activeIndexRef.current;
-    const nextIndex = (currentIndex + 1) % cards.length;
-    goTo(nextIndex);
-  };
-
   const startAutoplay = () => {
     stopAutoplay();
     if (cards.length <= 1) return;
@@ -128,6 +78,13 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cards.length]);
 
+  const next = () => {
+    if (!cards.length) return;
+    const currentIndex = activeIndexRef.current;
+    const nextIndex = (currentIndex + 1) % cards.length;
+    goTo(nextIndex);
+  };
+
   /* ================= REFS (TEXT) ================= */
 
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -135,6 +92,67 @@ export default function Home() {
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const textWrapRef = useRef<HTMLDivElement | null>(null);
   const ctaRef = useRef<HTMLButtonElement | null>(null);
+
+  /* ================= BG GLITCH REF ================= */
+
+  const bgRef = useRef<CarouselBgHandle | null>(null);
+
+  const currentBg = active?.background?.[0]
+    ? { src: bgUrl(active.background[0].src), alt: active.background[0].alt }
+    : { src: "", alt: "" };
+
+  const goTo = (nextIndex: number) => {
+    if (!cards.length) return;
+
+    const currentIndex = activeIndexRef.current;
+    if (nextIndex === currentIndex) return;
+    if (isAnimatingRef.current) return;
+
+    isAnimatingRef.current = true;
+
+    const nextCard = cards[nextIndex];
+    const nextBgItem = nextCard?.background?.[0];
+    const nextBg = nextBgItem
+      ? { src: bgUrl(nextBgItem.src), alt: nextBgItem.alt }
+      : { src: "", alt: "" };
+
+    // ✅ 1) GLITCH the background AND swap image during the glitch
+    bgRef.current?.glitchTo(nextBg);
+
+    const outTargets = [
+      audienceRef.current,
+      titleRef.current,
+      textWrapRef.current,
+      ctaRef.current,
+    ].filter(Boolean) as Element[];
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        requestAnimationFrame(() => {
+          isAnimatingRef.current = false;
+        });
+      },
+    });
+
+    // ✅ 2) Text OUT
+    tl.to(
+      outTargets,
+      {
+        opacity: 0,
+        y: -14,
+        filter: "blur(8px)",
+        duration: 0.32,
+        ease: "power2.in",
+        stagger: 0.04,
+      },
+      0,
+    );
+
+    // ✅ 3) Switch card content (sync-ish with background glitch swap)
+    tl.add(() => {
+      setActiveIndex(nextIndex);
+    }, 0.18);
+  };
 
   /* ================= TEXT ANIMATION (IN) ================= */
 
@@ -166,39 +184,20 @@ export default function Home() {
 
   if (!active) return null;
 
-  // ✅ Option B: typed mutable tuple (no readonly issue)
-  const activeBg: [{ src: string; alt: string }, { src: string; alt: string }] =
-    [
-      {
-        src: bgUrl(active.background[0].src),
-        alt: active.background[0].alt,
-      },
-      {
-        src: bgUrl(active.background[1].src),
-        alt: active.background[1].alt,
-      },
-    ];
-
   return (
     <section
       id="home"
       ref={sectionRef}
       className="relative w-full min-h-screen overflow-hidden"
-      onMouseEnter={stopAutoplay}
-      onMouseLeave={startAutoplay}
+      // onMouseEnter={stopAutoplay}
+      // onMouseLeave={startAutoplay}
     >
-      {/* Background motion (per active card) */}
-      <HeroBackgroundMotion
-        images={activeBg}
+      {/* ✅ Background carousel (active card image) + glitch on change */}
+      <CarouselBackgroundGlitch
+        ref={bgRef}
+        src={currentBg.src}
+        alt={currentBg.alt}
         overlayClassName="bg-black/55"
-        firstHoldMs={3000}
-        holdMs={3800}
-        outDur={1.05}
-        inDur={1.65}
-        outX={-1.4}
-        inStartX={2.0}
-        outBlur={8}
-        inBlur={12}
       />
 
       {/* Content */}
@@ -207,14 +206,14 @@ export default function Home() {
           <div className="mx-auto max-w-[36rem] min-[850px]:max-w-2xl">
             <div
               ref={audienceRef}
-              className="text-sm font-semibold tracking-wide text-white/70"
+              className=" text-base md:text-lg font-semibold tracking-wide text-white/70"
             >
               {active.audience}
             </div>
 
             <h1
               ref={titleRef}
-              className="mt-3 text-4xl font-bold tracking-tight text-white md:text-6xl"
+              className="mt-3 text-4xl font-bold tracking-wide  text-white md:text-6xl"
             >
               {active.title}
             </h1>

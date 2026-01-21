@@ -1,10 +1,20 @@
+import { useLayoutEffect, useRef } from "react";
 import about from "@/data/about.json";
 import { toHtml } from "@/utils/toHtml";
 import { getImageUrl } from "@/utils/getImageUrl";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* =======================
+   Types
+======================= */
 
 type AboutData = {
   sectionTitle: string;
   backgroundImage: string;
+
   profile: {
     name: string;
     position: string;
@@ -12,11 +22,20 @@ type AboutData = {
     image: string;
     bioHtml: string;
   };
+
   highlights: {
     sectionTitle: string;
-    items: { title: string; description: string }[];
+    items: {
+      value: number;
+      label: string;
+      description: string;
+    }[];
   };
 };
+
+/* =======================
+   About Bio
+======================= */
 
 function AboutBio({ profile }: { profile: AboutData["profile"] }) {
   return (
@@ -31,7 +50,6 @@ function AboutBio({ profile }: { profile: AboutData["profile"] }) {
 
       <div className="about-bio__text">
         <h3 className="about-bio__name">{profile.name}</h3>
-
         <div className="about-bio__position">{profile.position}</div>
         <div className="about-bio__org">{profile.organization}</div>
 
@@ -44,6 +62,57 @@ function AboutBio({ profile }: { profile: AboutData["profile"] }) {
   );
 }
 
+/* =======================
+   Highlight Card
+======================= */
+
+function HighlightCard({
+  value,
+  label,
+  description,
+}: {
+  value: number;
+  label: string;
+  description: string;
+}) {
+  const numberRef = useRef<HTMLSpanElement | null>(null);
+
+  useLayoutEffect(() => {
+    if (!numberRef.current) return;
+
+    gsap.fromTo(
+      numberRef.current,
+      { innerText: 0 },
+      {
+        innerText: value,
+        duration: 1.3,
+        ease: "power3.out",
+        snap: { innerText: 1 },
+        scrollTrigger: {
+          trigger: numberRef.current,
+          start: "top 80%",
+          once: true,
+        },
+      },
+    );
+  }, [value]);
+
+  return (
+    <div className="about-highlights__card">
+      <div className="about-highlights__card-title">
+        <span ref={numberRef} className="about-highlights__number" />
+        <span className="about-highlights__label">{label}</span>
+      </div>
+
+      <div className="about-highlights__card-text">{description}</div>
+    </div>
+  );
+}
+
+/* =======================
+   About Highlights
+======================= */
+
 function AboutHighlights({
   highlights,
 }: {
@@ -55,17 +124,21 @@ function AboutHighlights({
 
       <div className="about-highlights__grid">
         {highlights.items.map((item) => (
-          <div key={item.title} className="about-highlights__card">
-            <div className="about-highlights__card-title">{item.title}</div>
-            <div className="about-highlights__card-text">
-              {item.description} 
-            </div>
-          </div>
+          <HighlightCard
+            key={item.label}
+            value={item.value}
+            label={item.label}
+            description={item.description}
+          />
         ))}
       </div>
     </div>
   );
 }
+
+/* =======================
+   Main About Section
+======================= */
 
 export default function About() {
   const data = about as AboutData;
@@ -73,7 +146,9 @@ export default function About() {
   return (
     <section
       className="about section-wrap"
-      style={{ backgroundImage: `url(${getImageUrl(data.backgroundImage)})` }}
+      style={{
+        backgroundImage: `url(${getImageUrl(data.backgroundImage)})`,
+      }}
     >
       <div className="section-inner">
         <h2 className="section-title">{data.sectionTitle}</h2>

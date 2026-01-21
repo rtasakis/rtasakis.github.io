@@ -3,7 +3,7 @@
   "profile": {
     "name": "Rafail Tasakis",
     "position": "Founder & Principal Consultant",
-    "organization": "Tasakis Venture Strategy",
+    "organization": "",
     "image": "profile-img.png",
     "bioHtml": "<p>Entrepreneur with <strong>global experience</strong>, blending scientific with business skills. Trained as a <strong>bioinformatics scientist</strong> with a <strong>PhD</strong> in cancer biology, I later transitioned into <strong>cross-functional roles</strong> within startup ecosystems with <strong>founder-like responsibilities</strong>, spanning consulting, product and business development, and fundraising strategy. Having a strong and expanding global network, I am currently pursuing an <strong>Executive MBA</strong> while working as an independent consultant supporting innovators and investors at the intersection of life sciences and deep tech.</p><p><br /><em>My mission is to bring bold innovation faster to where it is most needed.</em> Having a global mindset and the ambition to make a tangible impact, I maintain a high-ownership and responsible attitude both personally and professionally.</p>"
   },
@@ -11,19 +11,23 @@
     "sectionTitle": "In a nutshell",
     "items": [
       {
-        "title": "9 Years of Experience",
+        "value": 9,
+        "label": "Years of Experience",
         "description": "in multicultural and diverse teams."
       },
       {
-        "title": "5 Languages",
+        "value": 5,
+        "label": "Languages",
         "description": "Fluent in English and Greek. Professionally competent in German, Dutch, and French."
       },
       {
-        "title": "5 Countries",
+        "value": 5,
+        "label": "Countries",
         "description": "I’ve worked and lived in: Greece, France, Germany, United States, Belgium."
       },
       {
-        "title": "4 Startups",
+        "value": 4,
+        "label": "Startups",
         "description": "I have professionally engaged with."
       }
     ]
