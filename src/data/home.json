@@ -15,12 +15,8 @@
       },
       "background": [
         {
-          "src": "innovators.jpg",
+          "src": "innovators.webp",
           "alt": "Innovators background"
-        },
-        {
-          "src": "innovators-2.png",
-          "alt": "Innovators background alt"
         }
       ]
     },
@@ -39,12 +35,8 @@
       },
       "background": [
         {
-          "src": "investors.jpg",
+          "src": "investors.webp",
           "alt": "Investors background"
-        },
-        {
-          "src": "investors-2.png",
-          "alt": "Investors background alt"
         }
       ]
     }

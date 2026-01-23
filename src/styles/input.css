@@ -42,11 +42,31 @@
 
 /* ===== Header ===== */
 
+/* default: transparent everywhere */
 .app-header {
   @apply fixed top-0 left-0 right-0 z-50;
   @apply flex items-center justify-between;
   @apply px-6 py-6;
   background: transparent;
+  transition:
+    background-color 220ms ease,
+    backdrop-filter 220ms ease,
+    border-color 220ms ease;
+}
+
+/* ✅ MOBILE ONLY glass effect (same vibe as about-bio__image) */
+@media (max-width: 768px) {
+  .app-header.is-scrolled {
+    @apply border-b border-white/10;
+    @apply ring-1 ring-white/25;
+
+    /* same “frosted glass” family as about-bio__image */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .app-header__logo {
@@ -54,7 +74,7 @@
 }
 
 .app-header__logo-img {
-  height: 96px;
+  height: 82px;
   width: auto;
   transition:
     height 0.3s ease,
@@ -386,7 +406,7 @@
 .about-bio__position {
   @apply mt-2;
   @apply text-xl font-semibold;
-   @apply text-primary;
+  @apply text-primary;
 }
 
 .about-bio__org {
