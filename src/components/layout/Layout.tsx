@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Header from "./Header";
 import Menu from "./Menu";
+import Footer from "./Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,6 +41,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       />
 
       <main className="app-main">{children}</main>
+
+      <Footer />
     </div>
   );
 }

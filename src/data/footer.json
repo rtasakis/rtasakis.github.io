@@ -1,0 +1,14 @@
+{
+  "brand": "Tasakis Venture Strategy",
+  "rights": "All rights reserved.",
+  "credit": {
+    "label": "Designed & built by",
+    "name": "Paris Pitsianis",
+    "url": "https://www.linkedin.com/in/paris-pitsianis-6a22b11b4/"
+  },
+  "links": [
+    { "label": "LinkedIn", "href": "https://www.linkedin.com/" },
+    { "label": "Privacy", "href": "/privacy" },
+    { "label": "Impressum", "href": "/impressum" }
+  ]
+}
