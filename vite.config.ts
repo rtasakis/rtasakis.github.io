@@ -12,7 +12,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/rafail-portfolio/",
+  base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
