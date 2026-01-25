@@ -54,6 +54,20 @@
     border-color 220ms ease;
 }
 
+/* header foreground color states */
+.app-header.is-on-hero {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.app-header.is-on-light {
+  color: rgb(23, 23, 23); /* neutral-900 vibe */
+}
+
+/* when scrolled, always dark foreground (even on hero) */
+.app-header.is-scrolled {
+  color: rgb(23, 23, 23);
+}
+
 /* ✅ MOBILE ONLY glass effect (same vibe as about-bio__image) */
 
 .app-header.is-scrolled {
@@ -78,6 +92,11 @@
   transition:
     height 0.3s ease,
     transform 0.3s ease;
+}
+
+.app-header__logo-img.is-symbol {
+  height: 56px;
+  width: auto;
 }
 
 .app-header__logo:hover .app-header__logo-img {
@@ -246,6 +265,10 @@
   position: relative;
 }
 
+.app-header__hamburger {
+  color: inherit; /* take header color */
+}
+
 .hamburger-top,
 .hamburger-middle,
 .hamburger-bottom {
@@ -255,7 +278,8 @@
   height: 3px;
   top: 0;
   left: 0;
-  background: #9c9aa6;
+  /* background: #9c9aa6; */
+  background: currentColor;
   transform: rotate(0);
   transition: all 0.5s;
 }

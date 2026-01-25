@@ -1,7 +1,9 @@
 // src/components/layout/Header.tsx
 import { useEffect, useState } from "react";
+
 import LogoLight from "@/assets/images/svg-logo-light.svg";
 import LogoDark from "@/assets/images/svg-logo-dark.svg";
+import SymbolDark from "@/assets/images/symbol-dark.svg";
 
 type HeaderProps = {
   isMenuOpen: boolean;
@@ -15,9 +17,7 @@ export default function Header({
   isHome,
 }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
-  // detect scroll (for adding .is-scrolled)
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
     onScroll();
@@ -25,25 +25,10 @@ export default function Header({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // detect mobile (matches your CSS breakpoint max-width: 768px)
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    const update = () => setIsMobile(mq.matches);
-    update();
-
-    // modern + fallback
-    mq.addEventListener?.("change", update);
-    mq.addListener?.(update);
-
-    return () => {
-      mq.removeEventListener?.("change", update);
-      mq.removeListener?.(update);
-    };
-  }, []);
-
-  // ✅ light only when hero AND NOT (mobile glass state)
-  const isGlassOnMobile = isMobile && isScrolled;
-  const useLightLogo = isHome && !isGlassOnMobile;
+  // On scroll: SymbolDark
+  // On top of Home(hero): LogoLight
+  // Elsewhere: LogoDark
+  const logoSrc = isScrolled ? SymbolDark : isHome ? LogoLight : LogoDark;
 
   return (
     <header
@@ -55,9 +40,12 @@ export default function Header({
     >
       <a href="#home" className="app-header__logo">
         <img
-          src={useLightLogo ? LogoLight : LogoDark}
+          src={logoSrc}
           alt="Tasakis Venture Strategy"
-          className="app-header__logo-img"
+          className={[
+            "app-header__logo-img",
+            isScrolled ? "is-symbol" : "",
+          ].join(" ")}
         />
       </a>
 
