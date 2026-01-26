@@ -67,7 +67,7 @@ function InfoRow({
 function ContactCard({ data }: { data: ContactData }) {
   return (
     <div className="contact-card">
-      <h2 className="section-title">{data.sectionTitle.toUpperCase()}</h2>
+      <h2 className="section-title">{data.sectionTitle}</h2>
 
       <div className="contact-grid">
         {/* LEFT */}
