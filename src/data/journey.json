@@ -96,17 +96,17 @@
     "items": [
       {
         "title": "McKinsey Forward Program: Strategy & problem-solving skills",
-        "issuer": "McKinsey & Co",
+        "issuer": "by McKinsey & Co",
         "year": "2025"
       },
       {
         "title": "MBA Essentials",
-        "issuer": "London School of Economics and Political Science",
+        "issuer": "by London School of Economics and Political Science",
         "year": "2025"
       },
       {
         "title": "Google Data Analytics",
-        "issuer": "Google",
+        "issuer": "by Google",
         "date": "2022"
       }
     ]
@@ -116,22 +116,22 @@
     "items": [
       {
         "title": "Global Perspectives Scholarship",
-        "issuer": "Antwerp Management School, Belgium",
+        "issuer": "by Antwerp Management School, Belgium",
         "year": "2025"
       },
       {
         "title": "CAROTS Startup School Participation",
-        "issuer": "DESY, Germany",
+        "issuer": "organized by DESY, Germany",
         "year": "2021"
       },
       {
         "title": "Greek National Award for Excellence in Science (‘Fotis Kafatos’) finalist",
-        "issuer": "Athens, Greece",
+        "issuer": "in Athens, Greece",
         "year": "2018"
       },
       {
         "title": "Otto Bayer Fellowship",
-        "issuer": "Bayer Foundations, Germany",
+        "issuer": "by Bayer Foundations, Germany",
         "year": "2016"
       }
     ]

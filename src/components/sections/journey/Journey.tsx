@@ -128,12 +128,12 @@ export default function Journey() {
 
   const certItems = data.certifications.items.map((c) => {
     const suffix = c.year ?? c.date;
-    const issuer = c.issuer ? ` by ${c.issuer}` : "";
+    const issuer = c.issuer ? ` ${c.issuer}` : "";
     return suffix ? `${c.title}${issuer} (${suffix})` : `${c.title}${issuer}`;
   });
 
   const honorItems = data.honors.items.map((h) => {
-    const issuer = h.issuer ? ` by ${h.issuer}` : "";
+    const issuer = h.issuer ? ` ${h.issuer}` : "";
     return h.year ? `${h.title}${issuer} (${h.year})` : `${h.title}${issuer}`;
   });
 
