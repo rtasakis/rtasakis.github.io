@@ -38,9 +38,59 @@ type AboutData = {
 ======================= */
 
 function AboutBio({ profile }: { profile: AboutData["profile"] }) {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const imageWrapRef = useRef<HTMLDivElement | null>(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const wrap = wrapRef.current;
+    const img = imageWrapRef.current;
+    const text = textRef.current;
+    if (!wrap || !img || !text) return;
+
+    const reduceMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+
+    if (reduceMotion) return;
+
+    const ctx = gsap.context(() => {
+      // initial state
+      gsap.set(img, { x: -40, opacity: 0 });
+      gsap.set(text, { x: 40, opacity: 0 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrap,
+          start: "top 75%",
+          end: "bottom 25%",
+          toggleActions: "play none none none",
+          // once: true,
+        },
+      });
+
+      tl.to(img, {
+        x: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: "power3.out",
+      }).to(
+        text,
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.out",
+        },
+        0.1, // μικρό overlap για πιο cinematic feel
+      );
+    }, wrap);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="about-bio">
-      <div className="about-bio__image">
+    <div className="about-bio" ref={wrapRef}>
+      <div className="about-bio__image" ref={imageWrapRef}>
         <img
           src={getImageUrl(profile.image)}
           alt={profile.name}
@@ -48,7 +98,7 @@ function AboutBio({ profile }: { profile: AboutData["profile"] }) {
         />
       </div>
 
-      <div className="about-bio__text">
+      <div className="about-bio__text" ref={textRef}>
         <h3 className="about-bio__name">{profile.name}</h3>
         <div className="about-bio__position">{profile.position}</div>
         <div className="about-bio__org">{profile.organization}</div>
@@ -63,9 +113,7 @@ function AboutBio({ profile }: { profile: AboutData["profile"] }) {
             <Quote className="about-bio__quote-icon" aria-hidden />
             <blockquote
               className="about-bio__quote-text"
-              dangerouslySetInnerHTML={{
-                __html: toHtml(profile.quoteHtml),
-              }}
+              dangerouslySetInnerHTML={{ __html: toHtml(profile.quoteHtml) }}
             />
           </figure>
         )}

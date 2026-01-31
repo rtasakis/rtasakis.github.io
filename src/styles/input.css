@@ -416,8 +416,11 @@
   @apply ring-1 ring-white/25;
   @apply bg-white/5 backdrop-blur-md;
   @apply shadow-lg shadow-black/30;
+  will-change: transform;
 
-  transition: transform 0.4s ease;
+  transform: translateZ(0);
+
+  /* transition: transform 0.4s ease; */
 }
 
 .about-bio__name {
