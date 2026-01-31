@@ -2,7 +2,7 @@
   "sectionTitle": "Contact",
   "backgroundImage": "background-image.webp",
   "left": {
-    "logoImage": "logo-dark.png",
+    "logoImage": "logo-dark.webp",
     "linkedin": {
       "type": "linkedin",
       "label": "LinkedIn",
@@ -23,9 +23,6 @@
     "name": "Rafail Tasakis",
     "role": "Founder & Principal Consultant",
     "brand": "",
-    "quote": {
-      "text": "Everything is theoretically impossible until it is done.",
-      "author": "Robert A. Heinlein"
-    }
+    "tagline": "Enable the bold."
   }
 }

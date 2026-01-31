@@ -29,10 +29,7 @@ type ContactData = {
     name: string;
     role: string;
     brand: string;
-    quote?: {
-      text: string;
-      author?: string;
-    };
+    tagline: string;
   };
 };
 
@@ -64,83 +61,77 @@ function InfoRow({
   );
 }
 
-function ContactCard({ data }: { data: ContactData }) {
-  return (
-    <div className="contact-card">
-      <h2 className="section-title">{data.sectionTitle}</h2>
+// function ContactCard({ data }: { data: ContactData }) {
+//   return (
 
-      <div className="contact-grid">
-        {/* LEFT */}
-        <div className="flex flex-col items-start">
-          <img
-            src={getImageUrl(data.left.logoImage)}
-            alt="Logo"
-            className="max-w-xs"
-          />
-
-          {data.left.linkedin && (
-            <InfoRow
-              icon={Linkedin}
-              label={data.left.linkedin.label}
-              value="Rafail Tasakis"
-              href={data.left.linkedin.url}
-            />
-          )}
-
-          {data.left.mail?.value && (
-            <InfoRow
-              icon={Mail}
-              label={data.left.mail.label}
-              value={data.left.mail.value}
-              href={data.left.mail.url}
-            />
-          )}
-
-          <InfoRow
-            icon={MapPin}
-            label={data.left.location.label ?? "Location"}
-            value={data.left.location.value}
-          />
-        </div>
-
-        {/* RIGHT */}
-        <div className="contact-right">
-          <h3 className="text-3xl font-bold">{data.right.name}</h3>
-
-          <div className="mt-2 text-xl font-semibold text-primary">
-            {data.right.role}
-          </div>
-
-          <div className="text-xl font-semibold text-primary">
-            {data.right.brand}
-          </div>
-
-          {data.right.quote?.text && (
-            <div className="mt-8 max-w-md text-sm italic">
-              “{data.right.quote.text}”
-              {data.right.quote.author && (
-                <div className="mt-2 text-xs not-italic">
-                  ~ {data.right.quote.author}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
+//   );
+// }
 
 export default function Contact() {
   const data = contact as ContactData;
 
   return (
-    <section
-      className="contact-section section-wrap"
-      style={{ backgroundColor: "#F3F5F8" }}
-    >
+    <section className="section-wrap" style={{ backgroundColor: "#F3F5F8" }}>
       <div className="section-inner">
-        <ContactCard data={data} />
+        <h2 className="section-title">{data.sectionTitle}</h2>
+
+        <div className="flex flex-col items-center gap-10 md:gap-0 md:flex-row md:items-center md:justify-around">
+          {/* LEFT */}
+          <div className="flex flex-col items-center">
+            <img
+              src={getImageUrl(data.left.logoImage)}
+              alt="Logo"
+              className="w-80 object-contain"
+            />
+
+            <div className="info">
+              {data.left.linkedin && (
+                <InfoRow
+                  icon={Linkedin}
+                  label={data.left.linkedin.label}
+                  value="Rafail Tasakis"
+                  href={data.left.linkedin.url}
+                />
+              )}
+
+              {data.left.mail?.value && (
+                <InfoRow
+                  icon={Mail}
+                  label={data.left.mail.label}
+                  value={data.left.mail.value}
+                  href={data.left.mail.url}
+                />
+              )}
+
+              {data.left.location?.value && (
+                <InfoRow
+                  icon={MapPin}
+                  label={data.left.location.label ?? "Location"}
+                  value={data.left.location.value}
+                />
+              )}
+            </div>
+          </div>
+
+          {/* RIGHT */}
+          <div className="flex flex-col items-center md:items-end justify-center text-center md:text-right text-neutral-800 md:pl-10">
+            <h3 className="text-3xl font-bold">{data.right.name}</h3>
+
+            <div className="mt-2 text-xl font-semibold text-primary">
+              {data.right.role}
+            </div>
+
+            <div className="text-xl font-semibold text-primary">
+              {data.right.brand}
+            </div>
+
+            {data.right.tagline && (
+              <div className="mt-8 max-w-md text-xl font-bold italic leading-snug text-neutral-900">
+                {data.right.tagline}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );
