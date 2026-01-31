@@ -1,4 +1,5 @@
 import journey from "@/data/journey.json";
+import { Briefcase, GraduationCap, BadgeCheck, Trophy } from "lucide-react";
 
 type JourneyData = {
   sectionTitle: string;
@@ -39,8 +40,23 @@ type JourneyData = {
   };
 };
 
-function BlockTitle({ children }: { children: string }) {
-  return <h3 className="journey-block-title">{children}</h3>;
+function BlockTitle({
+  children,
+  icon: Icon,
+}: {
+  children: string;
+  icon?: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+}) {
+  return (
+    <h3 className="journey-block-title">
+      {Icon && (
+        <span className="journey-block-title__icon">
+          <Icon className="journey-block-title__icon-svg" aria-hidden />
+        </span>
+      )}
+      <span>{children}</span>
+    </h3>
+  );
 }
 
 function TimelineItem({
@@ -53,7 +69,7 @@ function TimelineItem({
   isLast: boolean;
 }) {
   return (
-    <div className="journey-timeline-item">
+    <div className="journey-timeline-item group">
       <div className="journey-timeline-marker">
         <span className="journey-timeline-dot" />
         {!isLast && <span className="journey-timeline-line" />}
@@ -74,7 +90,7 @@ function TimelineItem({
 function ExperienceTimeline({ data }: { data: JourneyData["experience"] }) {
   return (
     <div>
-      <BlockTitle>{data.title}</BlockTitle>
+      <BlockTitle icon={Briefcase}>{data.title}</BlockTitle>
 
       <div className="journey-timeline">
         {data.items.map((org, idx) => (
@@ -93,7 +109,7 @@ function ExperienceTimeline({ data }: { data: JourneyData["experience"] }) {
 function EducationTimeline({ data }: { data: JourneyData["education"] }) {
   return (
     <div>
-      <BlockTitle>{data.title}</BlockTitle>
+      <BlockTitle icon={GraduationCap}>{data.title}</BlockTitle>
 
       <div className="journey-timeline">
         {data.items.map((e, idx) => (
@@ -109,36 +125,61 @@ function EducationTimeline({ data }: { data: JourneyData["education"] }) {
   );
 }
 
-function BulletList({ title, items }: { title: string; items: string[] }) {
+function BulletList({
+  title,
+  items,
+  icon: Icon,
+}: {
+  title: string;
+  items: { title: string; meta?: string }[];
+  icon?: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+}) {
   return (
     <div>
-      <h3 className="journey-block-title">{title}</h3>
+      <BlockTitle icon={Icon}>{title}</BlockTitle>
 
       <ul className="journey-bullet-list">
-        {items.map((x, i) => (
-          <li key={i}>{x}</li>
+        {items.map((item, i) => (
+          <li key={i}>
+            <span className="journey-bullet-title">{item.title}</span>
+            {item.meta && (
+              <span className="journey-bullet-meta"> {item.meta}</span>
+            )}
+          </li>
         ))}
       </ul>
     </div>
   );
 }
 
+
 export default function Journey() {
   const data = journey as JourneyData;
 
-  const certItems = data.certifications.items.map((c) => {
-    const suffix = c.year ?? c.date;
-    const issuer = c.issuer ? ` ${c.issuer}` : "";
-    return suffix ? `${c.title}${issuer} (${suffix})` : `${c.title}${issuer}`;
-  });
+const certItems = data.certifications.items.map((c) => ({
+  title: c.title,
+  meta: [
+    c.issuer,
+    c.year ?? c.date,
+  ]
+    .filter(Boolean)
+    .join(" "),
+}));
 
-  const honorItems = data.honors.items.map((h) => {
-    const issuer = h.issuer ? ` ${h.issuer}` : "";
-    return h.year ? `${h.title}${issuer} (${h.year})` : `${h.title}${issuer}`;
-  });
+
+const honorItems = data.honors.items.map((h) => ({
+  title: h.title,
+  meta: [
+    h.issuer,
+    h.year,
+  ]
+    .filter(Boolean)
+    .join(" "),
+}));
+
 
   return (
-  <section className="section-wrap">
+    <section className="section-wrap">
       <div className="section-inner">
         <h2 className="section-title">{data.sectionTitle}</h2>
 
@@ -148,8 +189,16 @@ export default function Journey() {
         </div>
 
         <div className="journey-grid journey-grid--bottom">
-          <BulletList title={data.certifications.title} items={certItems} />
-          <BulletList title={data.honors.title} items={honorItems} />
+          <BulletList
+            title={data.certifications.title}
+            items={certItems}
+            icon={BadgeCheck}
+          />
+          <BulletList
+            title={data.honors.title}
+            items={honorItems}
+            icon={Trophy}
+          />
         </div>
       </div>
     </section>
