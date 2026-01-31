@@ -618,12 +618,14 @@
 
 .hero-switcher__item {
   @apply relative z-10;
-  @apply h-10 w-10 rounded-full;
+  @apply h-5 w-2 rounded-full;
   @apply grid place-items-center;
   @apply text-[13px] font-semibold tracking-wide;
   @apply text-white/55;
   @apply transition duration-200;
+  @apply bg-white/15
 }
+
 
 .hero-switcher__item:hover {
   @apply text-white/85;

@@ -50,7 +50,7 @@ export default function Home() {
 
   /* ================= AUTOPLAY (CARD SWITCH) ================= */
 
-  const AUTOPLAY_DELAY = 6000;
+  const AUTOPLAY_DELAY = 30000;
   const autoplayRef = useRef<number | null>(null);
 
   const stopAutoplay = () => {
@@ -265,8 +265,9 @@ export default function Home() {
               idx === activeIndex ? "is-active" : ""
             }`}
             aria-label={`Go to slide ${idx + 1}`}
+            aria-current={idx === activeIndex ? "true" : undefined}
           >
-            {idx + 1}
+            <span className="hero-switcher__dot" aria-hidden="true" />
           </button>
         ))}
       </div>
