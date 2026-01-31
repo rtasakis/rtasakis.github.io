@@ -362,7 +362,6 @@
 
 .service-card:hover {
   @apply -translate-y-0.5 shadow-lg;
-  cursor: pointer;
 }
 
 .service-card__icon-row {
