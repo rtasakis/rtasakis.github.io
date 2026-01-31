@@ -5,6 +5,7 @@ import { getImageUrl } from "@/utils/getImageUrl";
 import CarouselBackgroundGlitch, {
   type CarouselBgHandle,
 } from "@/components/playground/CarouselBackgroundGlitch";
+import { getHeroCarouselTimings } from "@/utils/heroCarouselTimings";
 
 type HeroBackgroundItem = {
   src: string;
@@ -21,7 +22,7 @@ type HeroCard = {
     action: "scroll" | "link";
     target: string;
   };
-  background: [HeroBackgroundItem]; // ✅ your schema: 1 image
+  background: [HeroBackgroundItem]; // schema: 1 image
 };
 
 function handleCta(cta: HeroCard["cta"]) {
@@ -41,6 +42,9 @@ export default function Home() {
   const cards = useMemo(() => (home?.cards ?? []) as HeroCard[], []);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // All timing values come from config + function (no magic numbers here)
+  const t = useMemo(() => getHeroCarouselTimings("reading"), []);
+
   const activeIndexRef = useRef(0);
   useEffect(() => {
     activeIndexRef.current = activeIndex;
@@ -50,7 +54,6 @@ export default function Home() {
 
   /* ================= AUTOPLAY (CARD SWITCH) ================= */
 
-  const AUTOPLAY_DELAY = 30000;
   const autoplayRef = useRef<number | null>(null);
 
   const stopAutoplay = () => {
@@ -62,13 +65,20 @@ export default function Home() {
 
   const isAnimatingRef = useRef(false);
 
+  const next = () => {
+    if (!cards.length) return;
+    const currentIndex = activeIndexRef.current;
+    const nextIndex = (currentIndex + 1) % cards.length;
+    goTo(nextIndex);
+  };
+
   const startAutoplay = () => {
     stopAutoplay();
     if (cards.length <= 1) return;
 
     autoplayRef.current = window.setInterval(() => {
       if (!isAnimatingRef.current) next();
-    }, AUTOPLAY_DELAY);
+    }, t.autoplayDelayMs);
   };
 
   useEffect(() => {
@@ -76,14 +86,7 @@ export default function Home() {
     startAutoplay();
     return () => stopAutoplay();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cards.length]);
-
-  const next = () => {
-    if (!cards.length) return;
-    const currentIndex = activeIndexRef.current;
-    const nextIndex = (currentIndex + 1) % cards.length;
-    goTo(nextIndex);
-  };
+  }, [cards.length, t.autoplayDelayMs]);
 
   /* ================= REFS (TEXT) ================= */
 
@@ -116,7 +119,7 @@ export default function Home() {
       ? { src: bgUrl(nextBgItem.src), alt: nextBgItem.alt }
       : { src: "", alt: "" };
 
-    // ✅ 1) GLITCH the background AND swap image during the glitch
+    // 1) background glitch + swap happens inside the bg component using config
     bgRef.current?.glitchTo(nextBg);
 
     const outTargets = [
@@ -134,24 +137,24 @@ export default function Home() {
       },
     });
 
-    // ✅ 2) Text OUT
+    // 2) Text OUT (timings from config)
     tl.to(
       outTargets,
       {
         opacity: 0,
         y: -14,
         filter: "blur(8px)",
-        duration: 0.32,
+        duration: t.textOut.duration,
         ease: "power2.in",
-        stagger: 0.04,
+        stagger: t.textOut.stagger,
       },
       0,
     );
 
-    // ✅ 3) Switch card content (sync-ish with background glitch swap)
+    // 3) Switch content (timings from config)
     tl.add(() => {
       setActiveIndex(nextIndex);
-    }, 0.18);
+    }, t.contentSwitchAt);
   };
 
   /* ================= TEXT ANIMATION (IN) ================= */
@@ -173,14 +176,14 @@ export default function Home() {
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
-        duration: 0.95,
+        duration: t.textIn.duration,
         ease: "power3.out",
-        stagger: 0.09,
+        stagger: t.textIn.stagger,
       });
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [active?.id]);
+  }, [active?.id, t.textIn.duration, t.textIn.stagger]);
 
   if (!active) return null;
 
@@ -189,10 +192,8 @@ export default function Home() {
       id="home"
       ref={sectionRef}
       className="relative w-full min-h-screen overflow-hidden"
-      // onMouseEnter={stopAutoplay}
-      // onMouseLeave={startAutoplay}
     >
-      {/* ✅ Background carousel (active card image) + glitch on change */}
+      {/* Background carousel + glitch on change */}
       <CarouselBackgroundGlitch
         ref={bgRef}
         src={currentBg.src}
@@ -206,14 +207,14 @@ export default function Home() {
           <div className="mx-auto max-w-[36rem] min-[850px]:max-w-2xl">
             <div
               ref={audienceRef}
-              className=" text-base md:text-lg font-semibold tracking-wide text-white/70"
+              className="text-base font-semibold tracking-wide text-white/70 md:text-lg"
             >
               {active.audience}
             </div>
 
             <h1
               ref={titleRef}
-              className="mt-3 text-4xl font-bold tracking-wide  text-white md:text-6xl"
+              className="mt-3 text-4xl font-bold tracking-wide text-white md:text-6xl"
             >
               {active.title}
             </h1>
@@ -261,9 +262,7 @@ export default function Home() {
               goTo(idx);
               window.setTimeout(() => startAutoplay(), 200);
             }}
-            className={`hero-switcher__item ${
-              idx === activeIndex ? "is-active" : ""
-            }`}
+            className={`hero-switcher__item ${idx === activeIndex ? "is-active" : ""}`}
             aria-label={`Go to slide ${idx + 1}`}
             aria-current={idx === activeIndex ? "true" : undefined}
           >
