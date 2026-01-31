@@ -16,6 +16,7 @@ type HeroCard = {
   id: string;
   audience: string;
   title: string;
+  subtitle: string;
   text: string[];
   cta: {
     label: string;
@@ -93,6 +94,7 @@ export default function Home() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const audienceRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const subtitleRef = useRef<HTMLParagraphElement | null>(null);
   const textWrapRef = useRef<HTMLDivElement | null>(null);
   const ctaRef = useRef<HTMLButtonElement | null>(null);
 
@@ -125,6 +127,7 @@ export default function Home() {
     const outTargets = [
       audienceRef.current,
       titleRef.current,
+      subtitleRef.current,
       textWrapRef.current,
       ctaRef.current,
     ].filter(Boolean) as Element[];
@@ -166,6 +169,7 @@ export default function Home() {
       const targets = [
         audienceRef.current,
         titleRef.current,
+        subtitleRef.current,
         textWrapRef.current,
         ctaRef.current,
       ].filter(Boolean) as Element[];
@@ -218,6 +222,13 @@ export default function Home() {
             >
               {active.title}
             </h1>
+
+            <p
+              ref={subtitleRef}
+              className="mt-4 max-w-xl text-base font-medium text-white/75 md:text-lg"
+            >
+              {active.subtitle}
+            </p>
 
             <div ref={textWrapRef} className="mt-8 space-y-4">
               {active.text.map((line, idx) => (

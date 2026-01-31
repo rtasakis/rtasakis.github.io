@@ -137,7 +137,7 @@ export default function Contact() {
   return (
     <section
       className="contact-section section-wrap"
-      style={{ backgroundImage: `url(${getImageUrl(data.backgroundImage)})` }}
+      style={{ backgroundColor: "#F3F5F8" }}
     >
       <div className="section-inner">
         <ContactCard data={data} />

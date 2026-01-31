@@ -442,6 +442,18 @@
   @apply text-neutral-800;
 }
 
+.about-bio__quote {
+  @apply relative mt-8 pl-12 text-neutral-700;
+}
+
+.about-bio__quote-icon {
+  @apply absolute left-0 top-0 h-8 w-8 text-primary opacity-25;
+}
+
+.about-bio__quote-text {
+  @apply italic leading-relaxed;
+}
+
 /* ===============================
    ABOUT HIGHLIGHTS
 ================================ */
@@ -623,9 +635,8 @@
   @apply text-[13px] font-semibold tracking-wide;
   @apply text-white/55;
   @apply transition duration-200;
-  @apply bg-white/15
+  @apply bg-white/15;
 }
-
 
 .hero-switcher__item:hover {
   @apply text-white/85;

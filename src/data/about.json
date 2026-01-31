@@ -5,7 +5,8 @@
     "position": "Founder & Principal Consultant",
     "organization": "",
     "image": "profile-img.png",
-    "bioHtml": "<p>Entrepreneur with <strong>EU and US experience</strong>, blending scientific with business skills. Trained as a <strong>bioinformatics scientist</strong> with a <strong>PhD</strong> in cancer biology, I later transitioned into <strong>cross-functional roles</strong> within startup ecosystems with <strong>founder-like responsibilities</strong>, spanning consulting, product and business development, and fundraising strategy. Having a strong and expanding international network, I am currently pursuing an <strong>Executive MBA</strong> while working as an independent consultant supporting innovators and investors at the intersection of life sciences and deep tech.</p><p><br /><em>My mission is to bring bold innovation faster to where it is most needed.</em> Having a global mindset and the ambition to make a tangible impact, I maintain a high-ownership and responsible attitude.</p>"
+    "bioHtml": "<p>Entrepreneur with <strong>EU and US experience</strong>, blending scientific with business skills. Trained as a <strong>bioinformatics scientist</strong> with a <strong>PhD</strong> in cancer biology, I later transitioned into <strong>cross-functional roles</strong> within startup ecosystems with <strong>founder-like responsibilities</strong>, spanning consulting, product and business development, and fundraising strategy. Having a strong and expanding international network, I am currently pursuing an <strong>Executive MBA</strong> while working as an independent consultant supporting innovators and investors at the intersection of life sciences and deep tech.</p><p>Having a global mindset and the ambition to make a tangible impact, I maintain a high-ownership and responsible attitude.</p>",
+    "quoteHtml": "<p><em>My mission is to bring bold innovation faster to where it is most needed.</em></p>"
   },
   "highlights": {
     "sectionTitle": "In a nutshell",
@@ -31,6 +32,5 @@
         "description": "I made an impact for since 2023."
       }
     ]
-  },
-  "backgroundImage": "background-image.webp"
+  }
 }

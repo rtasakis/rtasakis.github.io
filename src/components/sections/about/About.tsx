@@ -4,6 +4,7 @@ import { toHtml } from "@/utils/toHtml";
 import { getImageUrl } from "@/utils/getImageUrl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Quote } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,14 +14,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 type AboutData = {
   sectionTitle: string;
-  backgroundImage: string;
-
   profile: {
     name: string;
     position: string;
     organization: string;
     image: string;
     bioHtml: string;
+    quoteHtml?: string;
   };
 
   highlights: {
@@ -57,6 +57,18 @@ function AboutBio({ profile }: { profile: AboutData["profile"] }) {
           className="about-bio__content"
           dangerouslySetInnerHTML={{ __html: toHtml(profile.bioHtml) }}
         />
+
+        {profile.quoteHtml && (
+          <figure className="about-bio__quote">
+            <Quote className="about-bio__quote-icon" aria-hidden />
+            <blockquote
+              className="about-bio__quote-text"
+              dangerouslySetInnerHTML={{
+                __html: toHtml(profile.quoteHtml),
+              }}
+            />
+          </figure>
+        )}
       </div>
     </div>
   );
@@ -146,9 +158,7 @@ export default function About() {
   return (
     <section
       className="about section-wrap"
-      style={{
-        backgroundImage: `url(${getImageUrl(data.backgroundImage)})`,
-      }}
+      style={{ backgroundColor: "#F3F5F8" }}
     >
       <div className="section-inner">
         <h2 className="section-title">{data.sectionTitle}</h2>
