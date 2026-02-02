@@ -506,12 +506,9 @@
 }
 
 .journey-grid {
-  @apply grid gap-20 md:grid-cols-2;
+  @apply grid gap-12 md:gap-20 md:grid-cols-2;
 }
 
-.journey-grid--bottom {
-  @apply mt-2 md:mt-16;
-}
 
 .journey-bullet-title {
   @apply font-semibold text-neutral-800;

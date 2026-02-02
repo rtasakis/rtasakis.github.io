@@ -152,31 +152,18 @@ function BulletList({
   );
 }
 
-
 export default function Journey() {
   const data = journey as JourneyData;
 
-const certItems = data.certifications.items.map((c) => ({
-  title: c.title,
-  meta: [
-    c.issuer,
-    c.year ?? c.date,
-  ]
-    .filter(Boolean)
-    .join(" "),
-}));
+  const certItems = data.certifications.items.map((c) => ({
+    title: c.title,
+    meta: [c.issuer, c.year ?? c.date].filter(Boolean).join(" "),
+  }));
 
-
-const honorItems = data.honors.items.map((h) => ({
-  title: h.title,
-  meta: [
-    h.issuer,
-    h.year,
-  ]
-    .filter(Boolean)
-    .join(" "),
-}));
-
+  const honorItems = data.honors.items.map((h) => ({
+    title: h.title,
+    meta: [h.issuer, h.year].filter(Boolean).join(" "),
+  }));
 
   return (
     <section className="section-wrap">
@@ -186,9 +173,7 @@ const honorItems = data.honors.items.map((h) => ({
         <div className="journey-grid">
           <ExperienceTimeline data={data.experience} />
           <EducationTimeline data={data.education} />
-        </div>
 
-        <div className="journey-grid journey-grid--bottom">
           <BulletList
             title={data.certifications.title}
             items={certItems}
