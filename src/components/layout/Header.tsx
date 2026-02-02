@@ -15,6 +15,7 @@ export default function Header({
   isMenuOpen,
   onToggleMenu,
   isHome,
+  isScrolled,
 }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
