@@ -103,6 +103,13 @@
   transform: scale(1.05);
 }
 
+.app-header__tagline {
+  @apply hidden md:block;
+  @apply ml-auto mr-3;
+  @apply text-xl font-bold italic tracking-wide;
+  @apply text-primary;
+}
+
 @media (min-width: 768px) {
   .app-header__logo-img {
     height: 96px;
@@ -453,7 +460,7 @@
 }
 
 .about-bio__quote-text {
-  @apply italic leading-relaxed;
+  @apply text-lg font-semibold italic leading-relaxed;
 }
 
 /* ===============================

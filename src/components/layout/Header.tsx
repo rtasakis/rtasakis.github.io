@@ -15,7 +15,6 @@ export default function Header({
   isMenuOpen,
   onToggleMenu,
   isHome,
-  isScrolled,
 }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -48,7 +47,6 @@ export default function Header({
           const el = document.getElementById("home");
           if (!el) return;
 
-          // ✅ καθαρό domain (χωρίς #home)
           history.pushState(null, "", window.location.pathname);
 
           el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -63,6 +61,11 @@ export default function Header({
           ].join(" ")}
         />
       </a>
+
+      {/* ✅ Tagline only when header is white (scrolled) */}
+      {isScrolled && (
+        <div className="app-header__tagline">Enabling the bold.</div>
+      )}
 
       <button
         type="button"

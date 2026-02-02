@@ -130,7 +130,7 @@ export default function Contact() {
             </div>
 
             {data.right.tagline && (
-              <div className="mt-8 max-w-md text-xl font-bold italic leading-snug text-neutral-900">
+              <div className="mt-8 max-w-md text-xl text-primary font-bold italic tracking-wide">
                 {data.right.tagline}
               </div>
             )}
