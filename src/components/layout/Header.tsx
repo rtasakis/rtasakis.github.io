@@ -38,7 +38,21 @@ export default function Header({
         isScrolled ? "is-scrolled" : "",
       ].join(" ")}
     >
-      <a href="#home" className="app-header__logo">
+      <a
+        href="/"
+        className="app-header__logo"
+        onClick={(e) => {
+          e.preventDefault();
+
+          const el = document.getElementById("home");
+          if (!el) return;
+
+          // ✅ καθαρό domain (χωρίς #home)
+          history.pushState(null, "", window.location.pathname);
+
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+      >
         <img
           src={logoSrc}
           alt="Tasakis Venture Strategy"

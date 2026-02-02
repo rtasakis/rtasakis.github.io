@@ -27,6 +27,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (!hash) return;
+
+      const el = document.getElementById(hash);
+      if (!el) return;
+
+      requestAnimationFrame(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    };
+
+    scrollToHash(); // initial load
+    window.addEventListener("popstate", scrollToHash);
+
+    return () => window.removeEventListener("popstate", scrollToHash);
+  }, []);
+
   return (
     <div className="app-layout ">
       <Header

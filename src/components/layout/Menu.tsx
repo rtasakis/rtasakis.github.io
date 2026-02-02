@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import navigation from "@/data/navigation.json";
 import { getIcon } from "@/utils/iconByKey";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type NavItem = {
   id: string;
@@ -15,6 +19,14 @@ type NavigationData = {
 function scrollToSection(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
+
+  // ✅ URL update ONLY on click
+  if (id === "home") {
+    history.pushState(null, "", window.location.pathname);
+  } else {
+    history.pushState(null, "", `#${id}`);
+  }
+
   el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -107,7 +119,10 @@ function DesktopMenu({
             <button
               key={item.id}
               type="button"
-              onClick={() => scrollToSection(item.id)}
+              onClick={() => {
+                if (isActive) return;
+                scrollToSection(item.id);
+              }}
               className={`menu__item ${isActive ? "is-active" : ""}`}
               aria-current={isActive ? "page" : undefined}
             >

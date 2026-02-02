@@ -5,6 +5,7 @@ import { getImageUrl } from "@/utils/getImageUrl";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Quote } from "lucide-react";
+import Section from "@/components/layout/Section";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -83,6 +84,7 @@ function AboutBio({ profile }: { profile: AboutData["profile"] }) {
         },
         0.1, // μικρό overlap για πιο cinematic feel
       );
+      
     }, wrap);
 
     return () => ctx.revert();
@@ -204,16 +206,13 @@ export default function About() {
   const data = about as AboutData;
 
   return (
-    <section
-      className="about section-wrap"
-      style={{ backgroundColor: "#F3F5F8" }}
-    >
+    <Section id="about" className="about section-wrap bg-neutral-100">
       <div className="section-inner">
         <h2 className="section-title">{data.sectionTitle}</h2>
 
         <AboutBio profile={data.profile} />
         <AboutHighlights highlights={data.highlights} />
       </div>
-    </section>
+    </Section>
   );
 }
