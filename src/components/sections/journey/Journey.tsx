@@ -166,7 +166,7 @@ export default function Journey() {
   }));
 
   return (
-    <section className="section-wrap">
+    <section id="journey" className="section-wrap">
       <div className="section-inner">
         <h2 className="section-title">{data.sectionTitle}</h2>
 

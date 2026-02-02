@@ -20,13 +20,6 @@ function scrollToSection(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
 
-  // ✅ URL update ONLY on click
-  if (id === "home") {
-    history.pushState(null, "", window.location.pathname);
-  } else {
-    history.pushState(null, "", `#${id}`);
-  }
-
   el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 

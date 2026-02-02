@@ -71,7 +71,11 @@ export default function Contact() {
   const data = contact as ContactData;
 
   return (
-    <section className="section-wrap" style={{ backgroundColor: "#F3F5F8" }}>
+    <section
+      id="contact"
+      className="section-wrap"
+      style={{ backgroundColor: "#F3F5F8" }}
+    >
       <div className="section-inner">
         <h2 className="section-title">{data.sectionTitle}</h2>
 
