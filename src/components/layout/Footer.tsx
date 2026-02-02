@@ -17,23 +17,31 @@ export default function Footer() {
 
   // only legal links on the RIGHT
   const legalLinks = links.filter((l) =>
-    ["/privacy", "/impressum", "/privacy-policy", "/imprint"].includes(l.href),
+    ["/privacy-policy", "/imprint"].includes(l.href),
   );
 
   return (
     <footer className="app-footer">
       <div className="app-footer__inner">
-        {/* LEFT: credit only */}
-        <div className="app-footer__left">
+        {/* LEFT – empty spacer */}
+        <div />
+
+        {/* CENTER – rights + credit */}
+        <div className="app-footer__center">
+          <p className="app-footer__meta">
+            © {year} {data.brand}
+            {data.rights ? `. ${data.rights}` : "."}
+          </p>
+
           {data.credit?.name && (
             <p className="app-footer__credit">
               {data.credit.label ?? "Designed & built by"}{" "}
               {data.credit.url ? (
                 <a
-                  className="app-footer__link"
                   href={data.credit.url}
                   target="_blank"
                   rel="noreferrer"
+                  className="app-footer__link"
                 >
                   {data.credit.name}
                 </a>
@@ -44,18 +52,10 @@ export default function Footer() {
           )}
         </div>
 
-        {/* CENTER: copyright */}
-        <div className="app-footer__center">
-          <p className="app-footer__meta">
-            © {year} {data.brand}
-            {data.rights ? `. ${data.rights}` : "."}
-          </p>
-        </div>
-
-        {/* RIGHT: legal links */}
+        {/* RIGHT – legal */}
         <nav className="app-footer__right" aria-label="Legal">
           {legalLinks.map((l) => (
-            <Link key={l.href} className="app-footer__legalLink" to={l.href}>
+            <Link key={l.href} to={l.href} className="app-footer__legalLink">
               {l.label}
             </Link>
           ))}

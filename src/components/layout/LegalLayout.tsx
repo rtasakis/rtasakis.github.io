@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "@/assets/images/logo-dark.webp";
+import { ArrowLeft } from "lucide-react";
 
 export default function LegalLayout({
   children,
@@ -28,16 +29,19 @@ export default function LegalLayout({
           <Link
             to="/"
             onClick={goTop}
-            className="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-600 hover:text-neutral-900 transition"
           >
-            Back to home
+            <ArrowLeft size={16} strokeWidth={2} />
+            <span>Back to home</span>
           </Link>
         </div>
       </header>
 
       {/* CONTENT */}
       <main>
-        <div className="mx-auto max-w-3xl px-4 py-12">{children}</div>
+        <div className="mx-auto max-w-6xl px-4 py-12">
+          <div className="max-w-3xl">{children}</div>
+        </div>
       </main>
     </div>
   );
