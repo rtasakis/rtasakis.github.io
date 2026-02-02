@@ -682,16 +682,25 @@
 
 .app-footer__inner {
   @apply mx-auto max-w-6xl px-4 py-6;
-  @apply flex flex-col items-center justify-center text-center;
+
+  /* mobile: stack */
+  @apply flex flex-col items-center gap-3 text-center;
+
+  /* desktop: 3 columns */
+  @apply sm:grid sm:grid-cols-3 sm:items-center sm:gap-4;
 }
 
 .app-footer__left {
-  @apply flex flex-col items-center gap-2;
+  @apply flex justify-center sm:justify-start;
 }
 
-/* Smaller + more subtle */
-.app-footer__credit {
-  @apply text-xs text-white/55;
+.app-footer__center {
+  @apply flex justify-center;
+}
+
+.app-footer__right {
+  @apply flex justify-center gap-5 whitespace-nowrap;
+  @apply sm:justify-end;
 }
 
 /* Main line slightly bigger */
@@ -699,7 +708,12 @@
   @apply text-sm text-white/80;
 }
 
-/* link = primary 500 */
+/* Smaller + more subtle */
+.app-footer__credit {
+  @apply text-xs text-white/55;
+}
+
+/* Default link (credit link) */
 .app-footer__link {
   color: #287188; /* primary.500 */
   text-decoration: underline;
@@ -713,4 +727,15 @@
 .app-footer__link:hover {
   color: #1a5669; /* primary.600 */
   text-decoration-color: rgba(40, 113, 136, 0.7);
+}
+
+/* Legal links: light + NO underline */
+.app-footer__legalLink {
+  @apply text-sm text-white/70 transition;
+  text-decoration: none;
+}
+
+.app-footer__legalLink:hover {
+  @apply text-white;
+  text-decoration: none;
 }

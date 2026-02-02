@@ -1,8 +1,11 @@
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+
 import "./styles/input.css";
 import App from "./App";
 import SvgLogoMotionIntro from "./components/playground/SvgLogoMotionIntro";
+import ScrollToTop from "./components/ScrollToTop";
 
 function Root() {
   const [showIntro, setShowIntro] = useState(true);
@@ -24,6 +27,9 @@ function Root() {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Root />
+    <BrowserRouter>
+      <ScrollToTop />
+      <Root />
+    </BrowserRouter>
   </StrictMode>,
 );
