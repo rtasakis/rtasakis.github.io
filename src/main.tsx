@@ -7,12 +7,6 @@ import App from "./App";
 import SvgLogoMotionIntro from "./components/playground/SvgLogoMotionIntro";
 import ScrollToTop from "./components/ScrollToTop";
 
-const redirect = sessionStorage.getItem("redirect");
-if (redirect) {
-  sessionStorage.removeItem("redirect");
-  window.history.replaceState(null, "", redirect);
-}
-
 function Root() {
   const [showIntro, setShowIntro] = useState(true);
 

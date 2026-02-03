@@ -1,13 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Redirecting...</title>
+    <meta http-equiv="refresh" content="0; url=/" />
     <script>
-      // Store the current path and redirect to root
-      sessionStorage.redirect = location.pathname;
+      // Hard redirect to home. No route restore.
       location.replace("/");
     </script>
+    <title>Redirecting...</title>
   </head>
   <body></body>
 </html>
