@@ -419,7 +419,6 @@
 
 .about-bio__image {
   @apply relative overflow-hidden rounded-2xl;
-  @apply pt-3; /* 👈 inner spacing */
   @apply ring-1 ring-white/25;
   @apply bg-white/5 backdrop-blur-md;
   @apply shadow-lg shadow-black/30;
